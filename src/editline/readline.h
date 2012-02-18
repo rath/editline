@@ -214,6 +214,9 @@ int		 rl_generic_bind(int, const char *, const char *, Keymap);
 int		 rl_bind_key_in_map(int, rl_command_func_t *, Keymap);
 void		 rl_cleanup_after_signal(void);
 void		 rl_free_line_state(void);
+
+void* xmalloc(size_t size);
+void  xfree(void* ptr);
 #ifdef __cplusplus
 }
 #endif

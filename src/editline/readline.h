@@ -45,6 +45,10 @@ typedef char	**CPPFunction(const char *, int, int);
 typedef char     *rl_compentry_func_t(const char *, int);
 typedef int	  rl_command_func_t(int, int);
 
+typedef void*	malloc_func(size_t size); 
+typedef void*   realloc_func(void *ptr, size_t newsize);
+typedef void    free_func(void *ptr);
+
 /* only supports length */
 typedef struct {
 	int length;
@@ -214,9 +218,7 @@ int		 rl_generic_bind(int, const char *, const char *, Keymap);
 int		 rl_bind_key_in_map(int, rl_command_func_t *, Keymap);
 void		 rl_cleanup_after_signal(void);
 void		 rl_free_line_state(void);
-
-void* xmalloc(size_t size);
-void  xfree(void* ptr);
+void		 rl_set_mem_functions(malloc_func*, realloc_func*, free_func*);
 #ifdef __cplusplus
 }
 #endif

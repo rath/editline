@@ -920,11 +920,3 @@ ed_command(EditLine *el, Int c __attribute__((__unused__)))
 	re_clear_display(el);
 	return CC_REFRESH;
 }
-
-void* xmalloc(size_t size) {
-	return malloc(size);
-}
-
-void xfree(void* ptr) { 
-	return free(ptr);
-}

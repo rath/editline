@@ -43,6 +43,7 @@
 #include <errno.h>
 #include <string.h>
 #endif
+#include "mem.h"
 
 char *
 fgetln(FILE *fp, size_t *len)
@@ -54,7 +55,7 @@ fgetln(FILE *fp, size_t *len)
 
 	if (buf == NULL) {
 		bufsiz = BUFSIZ;
-		if ((buf = malloc(bufsiz)) == NULL)
+		if ((buf = rl_malloc(bufsiz)) == NULL)
 			return NULL;
 	}
 
@@ -64,11 +65,11 @@ fgetln(FILE *fp, size_t *len)
 	*len = 0;
 	while ((ptr = strchr(&buf[*len], '\n')) == NULL) {
 		size_t nbufsiz = bufsiz + BUFSIZ;
-		char *nbuf = realloc(buf, nbufsiz);
+		char *nbuf = rl_realloc(buf, nbufsiz);
 
 		if (nbuf == NULL) {
 			int oerrno = errno;
-			free(buf);
+			rl_free(buf);
 			errno = oerrno;
 			buf = NULL;
 			return NULL;

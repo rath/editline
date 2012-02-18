@@ -77,6 +77,7 @@ __weak_alias(strvisx,_strvisx)
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
+#include "mem.h"
 
 static char *do_svis(char *, size_t *, int, int, int, const char *);
 
@@ -98,7 +99,7 @@ do {									      \
 	char *e;							      \
 	while (*o++)							      \
 		continue;						      \
-	extra = malloc((size_t)((o - orig) + MAXEXTRAS));		      \
+	extra = rl_malloc((size_t)((o - orig) + MAXEXTRAS));		      \
 	if (!extra) break;						      \
 	for (o = orig, e = extra; (*e++ = *o++) != '\0';)		      \
 		continue;						      \
@@ -313,7 +314,7 @@ isnvis(char *dst, size_t *dlen, int c, int flag, int nextc, const char *extra)
 	}
 	f = getvisfun(flag);
 	dst = (*f)(dst, dlen, c, flag, nextc, nextra);
-	free(nextra);
+	rl_free(nextra);
 	if (dst == NULL || (dlen && *dlen == 0)) {
 		errno = ENOSPC;
 		return NULL;
@@ -375,7 +376,7 @@ istrsnvis(char *dst, size_t *dlen, const char *csrc, int flag, const char *extra
 			return -1;
 		}
 	}
-	free(nextra);
+	rl_free(nextra);
 	if (dlen && *dlen == 0) {
 		errno = ENOSPC;
 		return -1;
@@ -428,7 +429,7 @@ istrsnvisx(char *dst, size_t *dlen, const char *csrc, size_t len, int flag,
 			return -1;
 		}
 	}
-	free(nextra);
+	rl_free(nextra);
 	if (dlen && *dlen == 0) {
 		errno = ENOSPC;
 		return -1;
@@ -475,7 +476,7 @@ invis(char *dst, size_t *dlen, int c, int flag, int nextc)
 	}
 	f = getvisfun(flag);
 	dst = (*f)(dst, dlen, uc, flag, nextc, extra);
-	free(extra);
+	rl_free(extra);
 	if (dst == NULL || (dlen && *dlen == 0)) {
 		errno = ENOSPC;
 		return NULL;
@@ -523,7 +524,7 @@ istrnvis(char *dst, size_t *dlen, const char *src, int flag)
 		return 0;
 	}
 	rv = istrsnvis(dst, dlen, src, flag, extra);
-	free(extra);
+	rl_free(extra);
 	return rv;
 }
 
@@ -555,7 +556,7 @@ istrnvisx(char *dst, size_t *dlen, const char *src, size_t len, int flag)
 		return 0;
 	}
 	rv = istrsnvisx(dst, dlen, src, len, flag, extra);
-	free(extra);
+	rl_free(extra);
 	return rv;
 }
 

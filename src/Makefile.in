@@ -59,7 +59,7 @@ libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libedit_la_LIBADD =
 am__libedit_la_SOURCES_DIST = chared.c common.c el.c emacs.c hist.c \
-	keymacro.c map.c chartype.c parse.c prompt.c read.c refresh.c \
+	keymacro.c map.c chartype.c parse.c prompt.c read.c mem.c refresh.c \
 	search.c sig.c terminal.c tty.c vi.c fgetln.c strlcat.c \
 	strlcpy.c unvis.c vis.c wcsdup.c tokenizer.c history.c \
 	filecomplete.c readline.c chared.h el.h hist.h histedit.h \
@@ -68,7 +68,7 @@ am__libedit_la_SOURCES_DIST = chared.c common.c el.c emacs.c hist.c \
 	editline/readline.h eln.c
 @WIDECHAR_TRUE@am__objects_1 = eln.lo
 am_libedit_la_OBJECTS = chared.lo common.lo el.lo emacs.lo hist.lo \
-	keymacro.lo map.lo chartype.lo parse.lo prompt.lo read.lo \
+	keymacro.lo map.lo chartype.lo parse.lo prompt.lo read.lo mem.lo \
 	refresh.lo search.lo sig.lo terminal.lo tty.lo vi.lo fgetln.lo \
 	strlcat.lo strlcpy.lo unvis.lo vis.lo wcsdup.lo tokenizer.lo \
 	history.lo filecomplete.lo readline.lo $(am__objects_1)

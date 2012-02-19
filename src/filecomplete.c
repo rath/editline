@@ -80,11 +80,11 @@ fn_tilde_expand(const char *txt)
 	size_t len = 0;
 
 	if (txt[0] != '~')
-		return strdup(txt);
+		return Strdup(txt);
 
 	temp = strchr(txt + 1, '/');
 	if (temp == NULL) {
-		temp = strdup(txt + 1);
+		temp = Strdup(txt + 1);
 		if (temp == NULL)
 			return NULL;
 	} else {
@@ -117,7 +117,7 @@ fn_tilde_expand(const char *txt)
 	}
 	el_free(temp);		/* value no more needed */
 	if (pass == NULL)
-		return strdup(txt);
+		return Strdup(txt);
 
 	/* update pointer txt to point at string immedially following */
 	/* first slash */
@@ -181,7 +181,7 @@ fn_filename_completion_function(const char *text, int state)
 			if (*text == 0)
 				filename = NULL;
 			else {
-				filename = strdup(text);
+				filename = Strdup(text);
 				if (filename == NULL)
 					return NULL;
 			}
@@ -199,13 +199,13 @@ fn_filename_completion_function(const char *text, int state)
 		el_free(dirpath);
 		dirpath = NULL;
 		if (dirname == NULL) {
-			if ((dirname = strdup("")) == NULL)
+			if ((dirname = Strdup("")) == NULL)
 				return NULL;
-			dirpath = strdup("./");
+			dirpath = Strdup("./");
 		} else if (*dirname == '~')
 			dirpath = fn_tilde_expand(dirname);
 		else
-			dirpath = strdup(dirname);
+			dirpath = Strdup(dirname);
 
 		if (dirpath == NULL)
 			return NULL;

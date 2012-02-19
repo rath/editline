@@ -260,7 +260,7 @@ rl_set_prompt(const char *prompt)
 		return 0;
 	if (rl_prompt)
 		el_free(rl_prompt);
-	rl_prompt = strdup(prompt);
+	rl_prompt = rl_strdup(prompt);
 	if (rl_prompt == NULL)
 		return -1;
 
@@ -414,7 +414,7 @@ readline(const char *p)
 	if (ret && count > 0) {
 		int lastidx;
 
-		buf = strdup(ret);
+		buf = rl_strdup(ret);
 		if (buf == NULL)
 			return NULL;
 		lastidx = count - 1;
@@ -676,7 +676,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 		return -1;
 
 	if (!has_mods) {
-		*result = strdup(aptr ? aptr : ptr);
+		*result = rl_strdup(aptr ? aptr : ptr);
 		if (aptr)
 			el_free(aptr);
 		if (*result == NULL)
@@ -689,7 +689,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 	/* Now parse any word designators */
 
 	if (*cmd == '%')	/* last word matched by ?pat? */
-		tmp = strdup(last_search_match? last_search_match:"");
+		tmp = rl_strdup(last_search_match? last_search_match:"");
 	else if (strchr("^*$-0123456789", *cmd)) {
 		start = end = -1;
 		if (*cmd == '^')
@@ -730,7 +730,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 			return -1;
 		}
 	} else
-		tmp = strdup(aptr? aptr:ptr);
+		tmp = rl_strdup(aptr? aptr:ptr);
 
 	if (aptr)
 		el_free(aptr);
@@ -748,7 +748,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 				*aptr = '\0';
 		} else if (*cmd == 't') {	/* remove leading path */
 			if ((aptr = strrchr(tmp, '/')) != NULL) {
-				aptr = strdup(aptr + 1);
+				aptr = rl_strdup(aptr + 1);
 				el_free(tmp);
 				tmp = aptr;
 			}
@@ -757,7 +757,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 				*aptr = '\0';
 		} else if (*cmd == 'e') {	/* remove all but suffix */
 			if ((aptr = strrchr(tmp, '.')) != NULL) {
-				aptr = strdup(aptr);
+				aptr = rl_strdup(aptr);
 				el_free(tmp);
 				tmp = aptr;
 			}
@@ -804,7 +804,7 @@ _history_expand_command(const char *command, size_t offs, size_t cmdlen,
 				if (*what == '\0') {
 					el_free(what);
 					if (search) {
-						from = strdup(search);
+						from = rl_strdup(search);
 						if (from == NULL) {
 							el_free(tmp);
 							return 0;
@@ -884,7 +884,7 @@ history_expand(char *str, char **output)
 		rl_initialize();
 
 	if (history_expansion_char == 0) {
-		*output = strdup(str);
+		*output = rl_strdup(str);
 		return 0;
 	}
 
@@ -900,7 +900,7 @@ history_expand(char *str, char **output)
 		(void)strcpy((*output) + 4, str);
 		str = *output;
 	} else {
-		*output = strdup(str);
+		*output = rl_strdup(str);
 		if (*output == NULL)
 			return 0;
 	}
@@ -1443,7 +1443,7 @@ replace_history_entry(int num, const char *line, histdata_t data)
 	if (history(h, &ev, H_NEXT_EVDATA, num, &he->data))
 		goto out;
 
-	he->line = strdup(ev.str);
+	he->line = rl_strdup(ev.str);
 	if (he->line == NULL)
 		goto out;
 
@@ -1703,7 +1703,7 @@ username_completion_function(const char *text, int state)
 		endpwent();
 		return NULL;
 	}
-	return strdup(pass->pw_name);
+	return rl_strdup(pass->pw_name);
 }
 
 
@@ -1934,7 +1934,7 @@ rl_callback_read_char()
 	if (done && rl_linefunc != NULL) {
 		el_set(e, EL_UNBUFFERED, 0);
 		if (done == 2) {
-		    if ((wbuf = strdup(buf)) != NULL)
+		    if ((wbuf = rl_strdup(buf)) != NULL)
 			wbuf[count] = '\0';
 		} else
 			wbuf = NULL;
@@ -2130,7 +2130,7 @@ rl_completion_matches(const char *str, rl_compentry_func_t *fun)
 		goto out;
 	list[len] = NULL;
 	if (len == 2) {
-		if ((list[0] = strdup(list[1])) == NULL)
+		if ((list[0] = rl_strdup(list[1])) == NULL)
 			goto out;
 		return list;
 	}
@@ -2145,7 +2145,7 @@ rl_completion_matches(const char *str, rl_compentry_func_t *fun)
 			min = j;
 	}
 	if (min == 0 && *str) {
-		if ((list[0] = strdup(str)) == NULL)
+		if ((list[0] = rl_strdup(str)) == NULL)
 			goto out;
 	} else {
 		if ((list[0] = el_malloc((min + 1) * sizeof(*list[0]))) == NULL)

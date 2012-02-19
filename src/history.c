@@ -90,9 +90,11 @@ struct TYPE(history) {
 #define	HDEL(h, ev, n)		(*(h)->h_del)((h)->h_ref, ev, n)
 
 #define	h_strdup(a)	Strdup(a)
-#define	h_malloc(a)	malloc(a)
-#define	h_realloc(a, b)	realloc((a), (b))
-#define	h_free(a)	free(a)
+#define	h_malloc(a)	rl_malloc(a)
+#define	h_realloc(a, b)	rl_realloc((a), (b))
+#define	h_free(a)	rl_free(a)
+
+#include "mem.h"
 
 typedef struct {
     int		num;

@@ -1,5 +1,6 @@
-#include "mem.h"
 #include <stdlib.h>
+#include <string.h>
+#include "mem.h"
 #include "editline/readline.h"
 
 extern malloc_func *s0 = NULL;
@@ -32,6 +33,24 @@ void rl_free(void *ptr) {
 	} else {
 		s2(ptr);
 	}
+}
+
+wchar_t *rl_wcsdup(const wchar_t *str) {
+	size_t size = wcslen(str);
+	wchar_t *ret = (wchar_t*)rl_malloc((size+1) * sizeof(wchar_t));
+	if( ret==0 )
+		return ret;
+	wcscpy(ret, str);
+	return ret;
+}
+
+char    *rl_strdup(char *str) {
+	size_t size = strlen(str);
+	char *ret = (char*)rl_malloc((size+1) * sizeof(char));
+	if( ret==NULL ) 
+		return ret;
+	strcpy(ret, str);
+	return ret;
 }
 
 void rl_set_mem_functions(malloc_func *l0, realloc_func *l1, free_func *l2) {

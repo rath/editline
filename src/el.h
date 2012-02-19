@@ -94,10 +94,11 @@ typedef struct el_state_t {
 /*
  * Until we come up with something better...
  */
-#define	el_malloc(a)	malloc(a)
-#define	el_realloc(a,b)	realloc(a, b)
-#define	el_free(a)	free(a)
+#define	el_malloc(a) rl_malloc(a)
+#define	el_realloc(a,b) rl_realloc(a, b)
+#define	el_free(a)	rl_free(a)
 
+#include "mem.h"
 #include "tty.h"
 #include "prompt.h"
 #include "keymacro.h"

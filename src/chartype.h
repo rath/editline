@@ -37,6 +37,7 @@
 #define _h_chartype_f
 
 
+#include "mem.h"
 
 #ifdef WIDECHAR
 
@@ -98,7 +99,7 @@ wchar_t *wcsdup(const wchar_t *s);
 #define Strchr(s,c)     wcschr(s,c)
 #define Strrchr(s,c)    wcsrchr(s,c)
 #define Strstr(s,v)     wcsstr(s,v)
-#define Strdup(x)       wcsdup(x)
+#define Strdup(x)       rl_wcsdup(x)
 #define Strcpy(d,s)     wcscpy(d,s)
 #define Strncpy(d,s,n)  wcsncpy(d,s,n)
 #define Strncat(d,s,n)  wcsncat(d,s,n)
@@ -148,7 +149,7 @@ wchar_t *wcsdup(const wchar_t *s);
 #define Strchr(s,c)     strchr(s,c)
 #define Strrchr(s,c)    strrchr(s,c)
 #define Strstr(s,v)     strstr(s,v)
-#define Strdup(x)       strdup(x)
+#define Strdup(x)       rl_strdup(x)
 #define Strcpy(d,s)     strcpy(d,s)
 #define Strncpy(d,s,n)  strncpy(d,s,n)
 #define Strncat(d,s,n)  strncat(d,s,n)

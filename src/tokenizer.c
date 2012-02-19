@@ -52,6 +52,7 @@ __RCSID("$NetBSD: tokenizer.c,v 1.20 2011/07/29 15:16:33 christos Exp $");
 #include <stdlib.h>
 #include "histedit.h"
 #include "chartype.h"
+#include "mem.h"
 
 typedef enum {
 	Q_none, Q_single, Q_double, Q_one, Q_doubleone
@@ -65,9 +66,9 @@ typedef enum {
 
 #define	IFS		STR("\t \n")
 
-#define	tok_malloc(a)		malloc(a)
-#define	tok_free(a)		free(a)
-#define	tok_realloc(a, b)	realloc(a, b)
+#define	tok_malloc(a)		rl_malloc(a)
+#define	tok_free(a)			rl_free(a)
+#define	tok_realloc(a, b)	rl_realloc(a, b)
 #define	tok_strdup(a)		Strdup(a)
 
 

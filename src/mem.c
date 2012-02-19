@@ -7,6 +7,8 @@ extern malloc_func *s0 = NULL;
 extern realloc_func *s1 = NULL;
 extern free_func *s2 = NULL;
 
+#define LOG(x) fprintf(stdout, "%s\n", x); fflush(stdout)
+
 void *rl_malloc(size_t size) {
 	void *ptr;
 	if( s0==NULL ) {
@@ -44,7 +46,7 @@ wchar_t *rl_wcsdup(const wchar_t *str) {
 	return ret;
 }
 
-char    *rl_strdup(char *str) {
+char    *rl_strdup(const char *str) {
 	size_t size = strlen(str);
 	char *ret = (char*)rl_malloc((size+1) * sizeof(char));
 	if( ret==NULL ) 

@@ -18,4 +18,15 @@ Makefile
 /src/.deps/
 /src/.libs/
 /src/Makefile
-stamp-h1
+/autom4te.cache/
+/src/common.h
+/src/emacs.h
+/src/fcns.c
+/src/fcns.h
+/src/help.c
+/src/help.h
+/src/historyn.c
+/src/libedit.la
+/src/tokenizern.c
+/src/vi.h
+/stamp-h1

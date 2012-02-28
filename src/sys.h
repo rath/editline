@@ -111,6 +111,9 @@ char	*fgetln(FILE *fp, size_t *len);
 #endif
 
 #ifndef HAVE_WCSDUP
+#ifndef wchar_t 
+#include <stdlib.h>
+#endif 
 wchar_t *wcsdup(const wchar_t *);
 #endif
 
